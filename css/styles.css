@@ -1,0 +1,264 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-family: TenbyFive;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  height: 100%;
+  margin: 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #e6e6e6;
+}
+img,
+h1,
+h2,
+h3 {
+  user-select: none;
+}
+h1,
+h2,
+h3 {
+  text-align: center;
+  cursor: pointer;
+}
+h1 {
+  font-size: min(32px, 5vh);
+  margin: 0px;
+}
+h2 {
+  font-size: min(24px, 5vh);
+  margin: 0px;
+}
+h3 {
+  color: #e6e6e6;
+  font-size: min(20.8px, 5vh);
+}
+header {
+  display: flex;
+  padding: min(1rem, 5vh);
+  justify-content: center;
+  align-items: center;
+  height: min(75px, 25%);
+  font-size: min(50px, 5vh);
+  background-color: #14279b;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 0px 1px white;
+}
+.header_span {
+  text-align: center;
+  font-weight: bold;
+  color: #e6e6e6;
+  user-select: none;
+}
+.mainlogo {
+  width: 7vh;
+  height: 100%;
+  margin: auto 1%;
+}
+.logo {
+  width: inherit;
+  height: inherit;
+}
+.main_wrapper {
+  display: flex;
+  justify-content: center;
+}
+.form_wrapper,
+.table_wrapper {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 2px;
+  overflow: auto;
+}
+fieldset {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-color: #14279b;
+  border-width: 4px;
+  border-radius: 3px;
+}
+legend {
+  font-size: 24px;
+}
+input[type="text"] {
+  padding: 5px;
+  width: 100%;
+  border-style: solid;
+  border-color: #14279b;
+  border-width: 4px;
+  border-radius: 3px;
+  font-size: 24px;
+  color: black;
+  font-family: TenbyFive;
+  outline: none;
+}
+label {
+  margin: 1% 0px;
+  font-size: 24px;
+  text-align: left;
+}
+.button_container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.button_container .fa {
+  font-size: 28px;
+  color: #14279b;
+  margin-right: 1rem;
+}
+.button_container .fa:hover {
+  cursor: pointer;
+  color: #8591df;
+}
+.button {
+  width: 100px;
+  color: white;
+  background-color: #14279b;
+  border: 2px solid #14279b;
+  border-radius: 5px;
+  font-family: TenbyFive;
+  font-size: 24px;
+  transition: all 1s;
+}
+.button * {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.button:hover {
+  cursor: pointer;
+  border-color: #8591df;
+  box-shadow: inset 100px 0 0 #8591df;
+}
+table {
+  width: 100%;
+  empty-cells: hide;
+  font-size: 24px;
+  border-collapse: collapse;
+}
+th {
+  color: white;
+  background-color: #14279b;
+}
+th,
+td {
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  text-align: center;
+}
+td:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #14279b;
+}
+td:first-child,
+th:first-child {
+  padding-right: 10px;
+  border-top-color: white;
+  border-bottom-color: white;
+  border-left-color: white;
+  background-color: white !important;
+  color: black !important;
+}
+.fa-trash:hover {
+  color: red !important;
+}
+.overlay {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000000b3;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+.popup {
+  position: relative;
+  margin: 25vh auto;
+  padding: 2rem;
+  background: #e6e6e6;
+  border-radius: 5px;
+  width: min(20vw, 70%);
+  transition: all 0.5s ease-in-out;
+}
+.close_button {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  transition: all 0.2s;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+.close_button:hover {
+  color: #14279b;
+}
+.popup_content {
+  margin-top: 1rem;
+  text-align: justify;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: min(75px, 25%);
+  background-color: #14279b;
+  box-shadow: 0px -2px 0px 1px white;
+  margin-top: 20px;
+}
+footer .fab {
+  margin: auto 0.7vw;
+  color: #e6e6e6;
+  font-size: min(30px, 6vh);
+}
+footer .fab:hover {
+  color: white;
+  font-size: min(35px, 7.5vh);
+}
+.clear {
+  clear: both;
+}
+.shady {
+  box-shadow: 2px 2px 2px 1px grey;
+}
+@font-face {
+  font-family: "TenbyFive";
+  src: url("../fonts/tenby-five-webfont.otf"),
+    url("../fonts/tenby-five-webfont.eot"),
+    url("../fonts/tenby-five-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/tenby-five-webfont.woff2") format("woff2"),
+    url("../fonts/tenby-five-webfont.woff") format("woff"),
+    url("../fonts/tenby-five-webfont.ttf") format("truetype"),
+    url("../fonts/tenby-five-webfont.svg#TenbyFive") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media only screen and (max-width: 600px) {
+  .main_wrapper {
+    padding: 10px 20px;
+  }
+  table {
+    font-size: 18px;
+  }
+  .popup {
+    width: 70%;
+  }
+}
