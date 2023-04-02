@@ -2,6 +2,7 @@ html {
   box-sizing: border-box;
   height: 100%;
   font-family: TenbyFive;
+  scrollbar-width: none;
 }
 *,
 *::before,
@@ -28,54 +29,101 @@ h3 {
   text-align: center;
   cursor: pointer;
 }
-h1 {
-  font-size: min(32px, 5vh);
-  margin: 0px;
-}
-h2 {
-  font-size: min(24px, 5vh);
-  margin: 0px;
-}
-h3 {
-  color: #e6e6e6;
-  font-size: min(20.8px, 5vh);
-}
 header {
   display: flex;
+  flex: 0 0 auto;
   padding: min(1rem, 5vh);
+  height: min(75px, 20%);
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
-  height: min(75px, 25%);
-  font-size: min(50px, 5vh);
-  background-color: #14279b;
-  margin-bottom: 20px;
-  box-shadow: 0px 2px 0px 1px white;
-}
-.header_span {
-  text-align: center;
+  font-size: xx-large;
   font-weight: bold;
+  box-shadow: 0px 2px 0px 1px white;
+  background-color: #14279b;
   color: #e6e6e6;
+}
+.header_span,
+.footer_span {
+  text-align: center;
   user-select: none;
 }
-.mainlogo {
-  width: 7vh;
-  height: 100%;
-  margin: auto 1%;
+.header_icon {
+  color: #e6e6e6;
+  font-size: xx-large;
+  margin-right: 1vh;
 }
-.logo {
-  width: inherit;
-  height: inherit;
-}
-.main_wrapper {
+footer {
   display: flex;
+  flex: 0 0 auto;
+  height: min(75px, 20%);
+  margin-top: 20px;
   justify-content: center;
+  align-items: center;
+  font-size: x-large;
+  box-shadow: 0px -2px 0px 1px white;
+  background-color: #14279b;
+  color: #e6e6e6;
 }
-.form_wrapper,
-.table_wrapper {
+.footer_icon {
+  color: #e6e6e6;
+  font-size: x-large;
+  margin-right: 1vh;
+}
+.footer_icon:hover {
+  color: white;
+  animation: spin 0.5s linear;
+}
+.center {
+  width: 50vw;
+  margin: auto;
+}
+.form_wrapper {
   background-color: white;
+}
+.card_wrapper,
+.form_wrapper {
   padding: 1rem;
   border-radius: 2px;
-  overflow: auto;
+}
+.card_stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 45%;
+  margin: 5px;
+  height: max-content;
+  border-radius: 3%;
+  border-left-width: 1vw;
+  border-left-color: #14279b;
+  border-left-style: solid;
+  background-color: white;
+}
+.card_text {
+  padding: 0.5rem;
+  overflow: hidden;
+}
+.card_icons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.card_icons * {
+  width: 2rem;
+  font-size: 24px;
+}
+.card_icons *:hover {
+  color: lightgray;
+  cursor: pointer;
+}
+p,
+h3 {
+  margin: 1px auto;
+  text-align: center;
 }
 fieldset {
   margin: 0px;
@@ -87,7 +135,7 @@ fieldset {
   border-radius: 3px;
 }
 legend {
-  font-size: 24px;
+  font-size: x-large;
 }
 input[type="text"] {
   padding: 5px;
@@ -96,23 +144,23 @@ input[type="text"] {
   border-color: #14279b;
   border-width: 4px;
   border-radius: 3px;
-  font-size: 24px;
+  font-size: x-large;
   color: black;
   font-family: TenbyFive;
   outline: none;
 }
 label {
   margin: 1% 0px;
-  font-size: 24px;
+  font-size: x-large;
   text-align: left;
 }
 .button_container {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin: 0.5rem auto;
 }
 .button_container .fa {
-  font-size: 28px;
+  font-size: 2rem;
   color: #14279b;
   margin-right: 1rem;
 }
@@ -127,7 +175,7 @@ label {
   border: 2px solid #14279b;
   border-radius: 5px;
   font-family: TenbyFive;
-  font-size: 24px;
+  font-size: x-large;
   transition: all 1s;
 }
 .button * {
@@ -140,40 +188,6 @@ label {
   cursor: pointer;
   border-color: #8591df;
   box-shadow: inset 100px 0 0 #8591df;
-}
-table {
-  width: 100%;
-  empty-cells: hide;
-  font-size: 24px;
-  border-collapse: collapse;
-}
-th {
-  color: white;
-  background-color: #14279b;
-}
-th,
-td {
-  border-style: solid;
-  border-width: 3px;
-  border-color: black;
-  text-align: center;
-}
-td:hover {
-  cursor: pointer;
-  color: white;
-  background-color: #14279b;
-}
-td:first-child,
-th:first-child {
-  padding-right: 10px;
-  border-top-color: white;
-  border-bottom-color: white;
-  border-left-color: white;
-  background-color: white !important;
-  color: black !important;
-}
-.fa-trash:hover {
-  color: red !important;
 }
 .overlay {
   visibility: hidden;
@@ -195,7 +209,7 @@ th:first-child {
   padding: 2rem;
   background: #e6e6e6;
   border-radius: 5px;
-  width: min(20vw, 70%);
+  width: 30vw;
   transition: all 0.5s ease-in-out;
 }
 .close_button {
@@ -203,41 +217,65 @@ th:first-child {
   top: 0;
   right: 1rem;
   transition: all 0.2s;
-  font-size: 30px;
+  font-size: xx-large;
   font-weight: bold;
   text-decoration: none;
-  color: black;
+  color: #14279b;
 }
 .close_button:hover {
-  color: #14279b;
+  color: lightcoral;
 }
 .popup_content {
   margin-top: 1rem;
   text-align: justify;
-}
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: min(75px, 25%);
-  background-color: #14279b;
-  box-shadow: 0px -2px 0px 1px white;
-  margin-top: 20px;
-}
-footer .fab {
-  margin: auto 0.7vw;
-  color: #e6e6e6;
-  font-size: min(30px, 6vh);
-}
-footer .fab:hover {
-  color: white;
-  font-size: min(35px, 7.5vh);
 }
 .clear {
   clear: both;
 }
 .shady {
   box-shadow: 2px 2px 2px 1px grey;
+}
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+  .popup {
+    width: 50%;
+  }
+  .center {
+    width: 75vw;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .header_icon,
+  header {
+    font-size: x-large;
+  }
+  footer,
+  .footer_icon {
+    font-size: medium;
+  }
+  .center {
+    width: 95vw;
+    margin: auto;
+  }
+  .card {
+    flex: 1 0 90%;
+    border-left-width: 0.5rem;
+  }
+  .button_container .fa,
+  .button {
+    font-size: x-large;
+  }
+  .popup {
+    width: 70%;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @font-face {
   font-family: "TenbyFive";
@@ -250,15 +288,4 @@ footer .fab:hover {
     url("../fonts/tenby-five-webfont.svg#TenbyFive") format("svg");
   font-weight: normal;
   font-style: normal;
-}
-@media only screen and (max-width: 600px) {
-  .main_wrapper {
-    padding: 10px 20px;
-  }
-  table {
-    font-size: 18px;
-  }
-  .popup {
-    width: 70%;
-  }
 }

@@ -1,10 +1,10 @@
 //Nodes
 const formNode = document.querySelector("form");
 const formWrapper = document.querySelector(".form_wrapper");
-const tableWrapper = document.querySelector(".table_wrapper");
+const cardWrapper = document.querySelector(".card_wrapper");
 const addBookBtn = document.querySelector(".new_button");
-const loadTableBtn = document.querySelector(".load_button");
-const deleteTableBtn = document.querySelector(".delete_button");
+const loadCardsBtn = document.querySelector(".load_button");
+const deleteCardsBtn = document.querySelector(".delete_button");
 const submitButton = document.querySelector(".submit_button");
 const submitEditButton = document.querySelector(".edit_button");
 const returnButton = document.querySelector(".return_button");
@@ -37,49 +37,61 @@ function populateTable(myBook) {
   }
   //if myBook is just a book object
   else {
-    let newRow = document.createElement("tr");
-    //add read/unread icon
-    let readCell = document.createElement("td");
+    //card
+    let card = document.createElement("div");
+    let cardText = document.createElement("div");
+    let cardIcons = document.createElement("div");
+    let cardH3 = document.createElement("h3");
+    let cardP1 = document.createElement("p");
+    let cardP2 = document.createElement("p");
+    card.classList.add("card");
+    card.classList.add("shady");
+    cardText.classList.add("card_text");
+    cardIcons.classList.add("card_icons");
+
+    //card icons
+    let deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fa");
+    deleteIcon.classList.add("fa-trash");
+
+    let editIcon = document.createElement("i");
+    editIcon.classList.add("fa");
+    editIcon.classList.add("fa-gears");
+
     let readIcon = document.createElement("i");
     readIcon.classList.add("fa");
+
     if (myBook.read === false) {
       readIcon.classList.add("fa-eye-slash");
     } else {
       readIcon.classList.add("fa-check");
     }
-    readCell.append(readIcon);
-    readCell.addEventListener("click", checkRead);
-    //delete button
-    let deleteCell = document.createElement("td");
-    let deleteIcon = document.createElement("i");
-    deleteIcon.classList.add("fa");
-    deleteIcon.classList.add("fa-trash");
-    deleteCell.append(deleteIcon);
-    deleteCell.addEventListener("click", deleteBook);
-    //name cell
-    let nameCell = document.createElement("td");
-    nameCell.append(myBook.name);
-    nameCell.addEventListener("click", showEditForm);
-    //author cell
-    let authorCell = document.createElement("td");
-    authorCell.append(myBook.author);
-    authorCell.addEventListener("click", showEditForm);
-    //pages cell
-    let pagesCell = document.createElement("td");
-    pagesCell.append(myBook.pages);
-    pagesCell.addEventListener("click", showEditForm);
-    //add everything to newRow
-    newRow.append(deleteCell);
-    newRow.append(readCell);
-    newRow.append(nameCell);
-    newRow.append(authorCell);
-    newRow.append(pagesCell);
+
+    deleteIcon.addEventListener("click", deleteBook);
+    editIcon.addEventListener("click", showEditForm);
+    readIcon.addEventListener("click", checkRead);
+
+    //add book info to the card
+    cardH3.append(myBook.name);
+    cardP1.append(myBook.author);
+    cardP2.append(`(${myBook.pages}) páginas`);
+
+    //add everything to card
+    cardText.append(cardH3);
+    cardText.append(cardP1);
+    cardText.append(cardP2);
+    cardIcons.append(readIcon);
+    cardIcons.append(editIcon);
+    cardIcons.append(deleteIcon);
+    card.append(cardText);
+    card.append(cardIcons);
+
     //add an index too
-    newRow.dataset.index = myBook.index;
-    document.querySelector("tbody").append(newRow);
+    card.dataset.index = myBook.index;
+    document.querySelector(".card_stack").append(card);
   }
 }
-function deleteTable() {
+function deleteCards() {
   let tempNodeList = document.querySelectorAll("[data-index]");
   tempNodeList.forEach((node) => {
     node.remove();
@@ -87,7 +99,7 @@ function deleteTable() {
   localStorage.clear();
   bookArray = [];
 }
-function restartTable() {
+function restartCards() {
   let tempNodeList = document.querySelectorAll("[data-index]");
   tempNodeList.forEach((node) => {
     node.remove();
@@ -101,15 +113,12 @@ function showForm() {
   formElements.pages.value = "";
   formWrapper.hidden = false;
   submitButton.hidden = false;
-  tableWrapper.hidden = true;
+  cardWrapper.hidden = true;
   submitEditButton.hidden = true;
 }
 function showTable() {
   if (localStorage.getItem("myBookArray")) {
-    /*const formSize = formWrapper.getBoundingClientRect();
-    tableWrapper.style.maxHeight = formSize.height + "px";
-    tableWrapper.style.minWidth = formSize.width + "px";*/
-    tableWrapper.hidden = false;
+    cardWrapper.hidden = false;
     formWrapper.hidden = true;
     submitEditButton.hidden = true;
     submitButton.hidden = true;
@@ -120,10 +129,10 @@ function showTable() {
 }
 function showEditForm() {
   let formElements = formNode.elements;
-  let currentName = bookArray[this.closest("tr").dataset.index].name;
-  let currentAuthor = bookArray[this.closest("tr").dataset.index].author;
-  let currentPages = bookArray[this.closest("tr").dataset.index].pages;
-  let currentIndex = this.closest("tr").dataset.index;
+  let currentName = bookArray[this.closest(".card").dataset.index].name;
+  let currentAuthor = bookArray[this.closest(".card").dataset.index].author;
+  let currentPages = bookArray[this.closest(".card").dataset.index].pages;
+  let currentIndex = this.closest(".card").dataset.index;
   //set form to current object
   formElements.name.value = currentName;
   formElements.author.value = currentAuthor;
@@ -131,14 +140,14 @@ function showEditForm() {
   selectedIndex = currentIndex;
   formWrapper.hidden = false;
   submitEditButton.hidden = false;
-  tableWrapper.hidden = true;
+  cardWrapper.hidden = true;
   submitButton.hidden = true;
 }
-function checkRead() {
+function checkRead(event) {
   //search book by closest row index
-  let book = bookArray[this.closest("tr").dataset.index];
+  let book = bookArray[this.closest(".card").dataset.index];
   //cell icon
-  let icon = this.querySelector("i");
+  let icon = event.target;
   if (book.read === false) {
     book.read = true;
     icon.classList.remove("fa-eye-slash");
@@ -152,19 +161,19 @@ function checkRead() {
 }
 function deleteBook() {
   //remove book from the array
-  bookArray.splice(this.closest("tr").dataset.index, 1);
+  bookArray.splice(this.closest(".card").dataset.index, 1);
   //update books' indexes
   for (let i = 0; i < bookArray.length; i++) {
     bookArray[i].index = i;
   }
   if (bookArray.length < 1) {
     //delete the table
-    deleteTable();
+    deleteCards();
     showForm();
   } else {
     //save the array and update table
     localStorage.setItem("myBookArray", JSON.stringify(bookArray));
-    restartTable();
+    restartCards();
   }
 }
 function submitEdit(event) {
@@ -178,7 +187,7 @@ function submitEdit(event) {
     bookArray[selectedIndex].pages = formElements.pages.value;
     //save the array
     localStorage.setItem("myBookArray", JSON.stringify(bookArray));
-    restartTable();
+    restartCards();
     showTable();
   } else {
     popupTrigger.click();
@@ -199,7 +208,7 @@ function submitBook(event) {
     //add it to the array and save it to localstorage
     bookArray.push(myBook);
     localStorage.setItem("myBookArray", JSON.stringify(bookArray));
-    restartTable();
+    restartCards();
     showForm();
   } else {
     popupTrigger.click();
@@ -225,7 +234,7 @@ function formIsValid(formElements) {
 //event listeners
 addBookBtn.addEventListener("click", showForm);
 returnButton.addEventListener("click", showForm);
-loadTableBtn.addEventListener("click", showTable);
-deleteTableBtn.addEventListener("click", deleteTable);
+loadCardsBtn.addEventListener("click", showTable);
+deleteCardsBtn.addEventListener("click", deleteCards);
 submitButton.addEventListener("click", submitBook);
 submitEditButton.addEventListener("click", submitEdit);
