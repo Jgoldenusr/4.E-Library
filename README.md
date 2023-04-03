@@ -10,4 +10,3 @@ You can test the demo [here.](https://jgoldenusr.github.io/4.E-Library/)
 
 - [Font icons](https://fontawesome.com) (fontawesome)
 - [Favicon](https://icon-icons.com) (icon-icons)
-- [Header icon](https://www.flaticon.com) (flaticon)
